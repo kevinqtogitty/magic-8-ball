@@ -1,4 +1,4 @@
-# R3F project setup w/ Vite and Typscript
+# Magic 8 Ball
 
 ## Setup
 
@@ -20,7 +20,13 @@ yarn dev
 
 `@react-spring/three` - React Spring for animations
 
+`@react-three/flex` - Flexbox for React Three Fiber
+
 `@types/three` - Types for TS
+
+`zustand` - State manager
+
+`gltfjsx` - 3D model converter gltf -> jsx/tsx component
 
 `leva` - Debugger GUI
 
