@@ -6,7 +6,7 @@ source: https://sketchfab.com/3d-models/magic-8-ball-with-dice-af61ed06db4e44ad9
 title: Magic 8 Ball with Dice
 */
 
-import * as THREE from 'three';
+import { Vector3 } from 'three';
 import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
@@ -43,9 +43,7 @@ export const Magic8Ball = (props: JSX.IntrinsicElements['group']) => {
   });
 
   const { position } = useSpring({
-    position: clicked
-      ? new THREE.Vector3(0, -100, 0)
-      : new THREE.Vector3(0, 0, 0),
+    position: clicked ? new Vector3(0, -100, 0) : new Vector3(0, 0, 0),
     config: { precision: 0.0001, mass: 30, tension: 80, friction: 40 }
   });
 
