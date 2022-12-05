@@ -1,13 +1,15 @@
 import create from 'zustand';
 
+export type OptionObject = {
+  optionText: string;
+  positionEnter: number[];
+  opacity: number;
+};
+
 interface Props {
-  options: any[];
-  addOption: (input: {
-    optionText: string;
-    positionEnter: number[];
-    opacity: number;
-  }) => void;
-  removeOption: (filteredOptions: []) => void;
+  options: OptionObject[];
+  addOption: (input: OptionObject) => void;
+  removeOption: (filteredOptions: OptionObject[]) => void;
   clearAllOptions: () => void;
   chosenOption: string;
   setChosenOption: (randomlySelectedChoice: string) => void;
