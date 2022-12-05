@@ -7,13 +7,13 @@ title: Magic 8 Ball with Dice
 */
 
 import * as THREE from 'three';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import { Mesh } from 'three';
+import { Group, Mesh } from 'three';
 import { useFrame } from '@react-three/fiber';
 import useOptions from '../state/useOptions';
-import { animated, useSpring, config } from '@react-spring/three';
+import { animated, useSpring } from '@react-spring/three';
 import useClicked from '../state/useClicked';
 
 type GLTFResult = GLTF & {
@@ -33,7 +33,7 @@ export const Magic8Ball = (props: JSX.IntrinsicElements['group']) => {
   ) as unknown as GLTFResult;
   const { clicked, setClicked } = useClicked((state) => state);
   const { options, setChosenOption } = useOptions((state) => state);
-  const magic8BallRef = useRef<Mesh>(null!);
+  const magic8BallRef = useRef<Group>(null!);
 
   useFrame(({ clock }) => {
     const time = clock.getElapsedTime();
@@ -43,7 +43,9 @@ export const Magic8Ball = (props: JSX.IntrinsicElements['group']) => {
   });
 
   const { position } = useSpring({
-    position: clicked ? [0, -100, 0] : [0, 0, 0],
+    position: clicked
+      ? new THREE.Vector3(0, -100, 0)
+      : new THREE.Vector3(0, 0, 0),
     config: { precision: 0.0001, mass: 30, tension: 80, friction: 40 }
   });
 
@@ -67,7 +69,7 @@ export const Magic8Ball = (props: JSX.IntrinsicElements['group']) => {
       position={position}
     >
       <group rotation={[Math.PI, 0, Math.PI]} onClick={selectRandom}>
-        <mesh
+        <animated.mesh
           geometry={nodes.Ball_lambert1_0.geometry}
           material={materials.lambert1}
         />
