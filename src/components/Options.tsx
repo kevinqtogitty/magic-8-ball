@@ -1,8 +1,9 @@
 import { animated, useTransition } from '@react-spring/three';
 import { Text3D, useTexture } from '@react-three/drei';
 import React from 'react';
-import useOptions from '../state/useOptions';
+import useOptions, { OptionObject } from '../state/useOptions';
 import { Flex, Box } from '@react-three/flex';
+import THREE from 'three';
 
 const Options: React.FC = () => {
   const options = useOptions((state) => state.options);
@@ -11,15 +12,15 @@ const Options: React.FC = () => {
   const matcap = useTexture('/matcaps/736655_D9D8D5_2F281F_B1AEAB.png');
 
   const transitions = useTransition(options, {
-    from: { position: [0, -10, 0], opacity: 0 },
+    from: { position: new THREE.Vector3(0, -10, 0), opacity: 0 },
     enter: (option) => [
       { position: option.positionEnter, opacity: option.opacity }
     ],
-    leave: { position: [0, -10, 0], opacity: 0 }
+    leave: { position: new THREE.Vector3(0, -10, 0), opacity: 0 }
   });
 
   const handleRemoveOption = (optionToRemove: string) => {
-    const optionsFiltered = options.filter(
+    const optionsFiltered: OptionObject[] = options.filter(
       (option) => option.optionText != optionToRemove
     );
     removeOption(optionsFiltered);
@@ -59,10 +60,7 @@ const Options: React.FC = () => {
                         <meshMatcapMaterial matcap={matcap} color="hotpink" />
                       </Text3D>
                     </animated.mesh>
-                    <meshMatcapMaterial
-                      matcap={matcap}
-                      opacity={spring.opacity}
-                    />
+                    <meshMatcapMaterial matcap={matcap} />
                   </Text3D>
                 </animated.mesh>
               </animated.group>
