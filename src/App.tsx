@@ -1,6 +1,6 @@
 import React from 'react';
-import { OrbitControls, Sky, Stars } from '@react-three/drei';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Stars } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import { Flex, Box } from '@react-three/flex';
 
 import { Html } from '@react-three/drei';
