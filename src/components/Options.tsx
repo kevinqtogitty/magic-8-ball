@@ -3,7 +3,6 @@ import { Text3D, useTexture } from '@react-three/drei';
 import React from 'react';
 import useOptions, { OptionObject } from '../state/useOptions';
 import { Flex, Box } from '@react-three/flex';
-import { Vector3 } from 'three';
 
 const Options: React.FC = () => {
   const options = useOptions((state) => state.options);
@@ -12,11 +11,9 @@ const Options: React.FC = () => {
   const matcap = useTexture('/matcaps/736655_D9D8D5_2F281F_B1AEAB.png');
 
   const transitions = useTransition(options, {
-    from: { position: new Vector3(0, -10, 0), opacity: 0 },
-    enter: (option) => [
-      { position: option.positionEnter, opacity: option.opacity }
-    ],
-    leave: { position: new Vector3(0, -10, 0), opacity: 0 }
+    from: { position: [0, -10, 0] },
+    enter: (option) => [{ position: option.positionEnter }],
+    leave: { position: [0, -10, 0] }
   });
 
   const handleRemoveOption = (optionToRemove: string) => {
