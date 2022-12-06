@@ -25,9 +25,9 @@ const Form: React.FC = () => {
   return (
     <form action="submit" onSubmit={(e) => submitOption(e)}>
       <div className="inputLabel">
-        <label htmlFor="input">Option: </label>
+        <label htmlFor="input" />
         <input
-          placeholder="McDonalds"
+          placeholder="Enter Option Here"
           onChange={(e) => handleInput(e)}
           value={input}
         />
